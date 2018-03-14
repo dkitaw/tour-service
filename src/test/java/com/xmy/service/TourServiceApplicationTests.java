@@ -27,7 +27,7 @@ public class TourServiceApplicationTests {
 		int width = 300;
 		int height = 300;
 		String format = "png";
-		String content = "http://120.79.211.240:8080/#/table";
+		String content = "http://120.79.211.240:8080/";
 		//定义二维码的参数
 		HashMap map = new HashMap();
 		//设置编码
