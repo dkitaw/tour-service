@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+    application:
+      name: tour-service
+    datasource:
+            driver-class-name: com.mysql.jdbc.Driver
+            type: com.alibaba.druid.pool.DruidDataSource
+            druid:
+              url: jdbc:mysql://120.79.211.240:3306/tour?useUnicode=true&characterEncoding=utf8&autoReconnect=true&characterSetResults=utf8
+              username: root
+              password: root
+              initial-size: 5
+              max-active: 50
+              min-idle: 5
+              # 配置获取连接等待超时的时间
+              max-wait: 60000
+              pool-prepared-statements: true
+              max-pool-prepared-statement-per-connection-size: 20
+              validation-query: SELECT 1
+              test-on-borrow: false
+              test-on-return: false
+              test-while-idle: true
+              min-evictable-idle-time-millis: 300000
+              time-between-eviction-runs-millis: 300000
+              filters: stat
+              connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000             
+eureka:
+  client:
+    serviceUrl: 
+      defaultZone: http://localhost:8761/eureka/
+management:
+  security:
+    enabled: false              
