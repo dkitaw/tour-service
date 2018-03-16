@@ -1,11 +1,14 @@
 package com.xmy.service.controller;
 
+import com.xmy.service.bean.User;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -26,6 +29,11 @@ public class UserController {
     @RequestMapping("/userList")
     public Object userList(){
         return new JsonResponse(userDao.userList());
+    }
+
+    @RequestMapping("/list")
+    public List<User> list(){
+        return userDao.userList();
     }
 
 }
