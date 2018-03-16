@@ -7,8 +7,10 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.xmy.service.dao.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -17,14 +19,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TourServiceApplicationTests {
 
+    @Autowired
+    private UserDao userDao;
 
 	@Test
 	public void contextLoads() {
-
+        System.out.println(userDao.userList());
 	}
 
 
