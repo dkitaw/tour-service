@@ -9,21 +9,30 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    private int id;
+    private Integer id;
+    private String nickname;
     private String username;
     private String password;
-    private int sex;
+    private Integer sex;
     private String headPic;
     private String backgroundPic;
     private String email;
     private String phone;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUsername() {
@@ -42,11 +51,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
