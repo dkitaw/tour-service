@@ -1,6 +1,6 @@
 package com.xmy.service.dao;
 
-import com.xmy.service.vo.ArticleInfo;
+import com.xmy.bean.vo.ArticleInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

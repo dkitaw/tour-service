@@ -1,11 +1,12 @@
 package com.xmy.service.controller;
 
-import com.xmy.service.bean.User;
+import com.xmy.bean.bean.User;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,8 +23,8 @@ public class UserController {
     private UserDao userDao;
 
     @RequestMapping("/login")
-    public String login(){
-        return "登录成功";
+    public User login(@RequestParam String username, @RequestParam String password){
+        return userDao.getByUsernameAndPassword(username, password);
     }
 
     @RequestMapping("/userList")

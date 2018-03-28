@@ -1,7 +1,6 @@
 package com.xmy.service.dao;
 
-import com.xmy.service.bean.Comment;
-import com.xmy.service.vo.CommentInfo;
+import com.xmy.bean.vo.CommentInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 package com.xmy.service.controller;
 
+import com.xmy.bean.vo.ArticleInfo;
 import com.xmy.service.service.ArticleService;
 import com.xmy.service.util.JsonResponse;
-import com.xmy.service.vo.ArticleInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

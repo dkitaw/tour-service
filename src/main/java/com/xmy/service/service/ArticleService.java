@@ -1,10 +1,9 @@
 package com.xmy.service.service;
 
-import com.xmy.service.bean.Comment;
+import com.xmy.bean.vo.ArticleInfo;
+import com.xmy.bean.vo.CommentInfo;
 import com.xmy.service.dao.ArticleDao;
 import com.xmy.service.dao.CommentDao;
-import com.xmy.service.vo.ArticleInfo;
-import com.xmy.service.vo.CommentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
