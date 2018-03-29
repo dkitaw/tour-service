@@ -1,5 +1,6 @@
 package com.xmy.service.controller;
 
+import com.xmy.bean.bean.Article;
 import com.xmy.bean.vo.ArticleInfo;
 import com.xmy.service.service.ArticleService;
 import com.xmy.service.util.JsonResponse;
@@ -28,10 +29,8 @@ public class ArticleController {
 
     @CrossOrigin
     @RequestMapping(value = "/addArticle", produces = "application/json;charset=UTF-8")
-    public JsonResponse addArticle(HttpServletRequest request){
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-
+    public JsonResponse addArticle(@RequestParam("article") Article article){
+        articleService.addArticle(article);
         return new JsonResponse("");
     }
     @CrossOrigin

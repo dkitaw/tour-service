@@ -1,5 +1,6 @@
 package com.xmy.service.service;
 
+import com.xmy.bean.bean.Article;
 import com.xmy.bean.vo.ArticleInfo;
 import com.xmy.bean.vo.CommentInfo;
 import com.xmy.service.dao.ArticleDao;
@@ -31,5 +32,9 @@ public class ArticleService {
             info.setCommentInfoList(commentList);
         }
         return list;
+    }
+
+    public void addArticle(Article article) {
+        articleDao.insert(article.getTitle(),article.getContent(),article.getPics(),article.getAddress(),article.getPlate(),article.getUserId());
     }
 }
