@@ -11,12 +11,12 @@ public class SqlProvider {
 	public String insertArticle(Map<String,Object> article){
 		String sql = "insert into article" +
 				"(title,content,pics,create_time,address,zanNum,plate,user_id)" +
-				"values(" +
-				article.get("title")+"," +
-				article.get("content")+","+
-				article.get("pics")+","+
-				"now(),"+
-				article.get("address")+","+
+				"values('" +
+				article.get("title")+"','" +
+				article.get("content")+"','"+
+				article.get("pics")+"',"+
+				"now(),'"+
+				article.get("address")+"',"+
 				"0,"+
 				article.get("plate")+","+
 				article.get("userId")+

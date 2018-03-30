@@ -28,8 +28,8 @@ public class ArticleController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/addArticle", produces = "application/json;charset=UTF-8")
-    public JsonResponse addArticle(@RequestParam("article") Article article){
+    @RequestMapping(value = "/addArticle", produces = "application/json;charset=UTF-8" , method = RequestMethod.POST)
+    public JsonResponse addArticle(@RequestBody Article article){
         articleService.addArticle(article);
         return new JsonResponse("");
     }
