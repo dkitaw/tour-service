@@ -3,6 +3,7 @@ package com.xmy.service.controller;
 import com.xmy.bean.bean.User;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.util.JsonResponse;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,9 @@ public class UserController {
         return userDao.userList();
     }
 
-
+    @RequestMapping("/getUserById")
+    public User getById(@RequestParam("id") int id){
+        return userDao.getById(id);
+    }
 
 }
