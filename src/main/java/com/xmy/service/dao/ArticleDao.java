@@ -24,4 +24,10 @@ public interface ArticleDao {
                 @Param("address") String address,
                 @Param("plate") Integer plate,
                 @Param("userId") Integer userId);
+
+    @Select("select a.id,a.title,a.content,a.pics,a.create_time createTime, a.address,a.zanNum,a.plate,a.user_id userId,b.nickname,b.headPic,b.sex from article a, user b where a.user_id = b.id and b.id = #{id}")
+    List<ArticleInfo> getArticleInfoById(@Param("id") int id);
+
+    @Delete("delete from article where id = #{id}")
+    int deleteById(@Param("id") int id);
 }
