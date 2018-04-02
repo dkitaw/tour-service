@@ -3,8 +3,10 @@ package com.xmy.service.controller;
 import com.xmy.bean.bean.Article;
 import com.xmy.bean.bean.Comment;
 import com.xmy.bean.bean.User;
+import com.xmy.bean.common.Page;
 import com.xmy.bean.vo.ArticleInfo;
 import com.xmy.bean.vo.CommentInfo;
+import com.xmy.service.dao.ArticleDao;
 import com.xmy.service.dao.CommentDao;
 import com.xmy.service.service.ArticleService;
 import com.xmy.service.service.CommentService;
@@ -29,11 +31,24 @@ public class ArticleController {
     private ArticleService articleService;
 
     @Autowired
+    private ArticleDao articleDao;
+
+    @Autowired
     private CommentService commentService;
 
     @RequestMapping("/articleInfoList")
     public List<ArticleInfo> articleInfoList(){
         return articleService.getArticleInfo();
+    }
+
+    @RequestMapping("/articleInfoPage")
+    public List<ArticleInfo> articleInfoPageList(@RequestBody Page page){
+        return articleService.getArticlePageList(page);
+    }
+
+    @RequestMapping("/getArticleNum")
+    public int getArticleNum(){
+        return articleDao.getNum();
     }
 
     @RequestMapping("/getArticleInfosById")
@@ -83,6 +98,14 @@ public class ArticleController {
     public JsonResponse deleteArticle(@RequestParam("articleId") String articleId){
         int id = Integer.valueOf(articleId);
         articleService.deleteById(id);
+        return new JsonResponse("");
+    }
+
+    @CrossOrigin(origins = "http://localhost:8081")
+    @RequestMapping(value = "/laud", produces = "application/json;charset=UTF-8")
+    public JsonResponse laud(@RequestParam("articleId") String articleId){
+        int id = Integer.valueOf(articleId);
+        articleService.giveLaud(id);
         return new JsonResponse("");
     }
 

@@ -20,8 +20,7 @@ public interface UserDao {
 	@Select("SELECT * FROM user")
 	List<User> userList();
 
+    @Insert("insert into follow (user1_id, user2_id) values(#{user1Id}, #{user2Id})")
+    int addFollow(@Param("user1Id") int user1Id, @Param("user2Id") int user2Id);
 
-
-
-		
 }

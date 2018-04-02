@@ -3,6 +3,7 @@ package com.xmy.service.service;
 import com.xmy.bean.bean.Article;
 import com.xmy.bean.bean.Comment;
 import com.xmy.bean.bean.User;
+import com.xmy.bean.common.Page;
 import com.xmy.bean.vo.ArticleInfo;
 import com.xmy.bean.vo.CommentInfo;
 import com.xmy.service.dao.ArticleDao;
@@ -55,5 +56,13 @@ public class ArticleService {
 
     public int deleteById(int id) {
         return articleDao.deleteById(id);
+    }
+
+    public int giveLaud(int id) {
+        return articleDao.giveLaud(id);
+    }
+
+    public List<ArticleInfo> getArticlePageList(Page page) {
+        return articleDao.getPageList(page);
     }
 }

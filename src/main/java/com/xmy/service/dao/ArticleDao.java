@@ -1,6 +1,7 @@
 package com.xmy.service.dao;
 
 import com.xmy.bean.bean.Article;
+import com.xmy.bean.common.Page;
 import com.xmy.bean.vo.ArticleInfo;
 import org.apache.ibatis.annotations.*;
 
@@ -30,4 +31,14 @@ public interface ArticleDao {
 
     @Delete("delete from article where id = #{id}")
     int deleteById(@Param("id") int id);
+
+    //点赞
+    @Update("update article set zanNum = zanNum+1 where id = #{id}")
+    int giveLaud(@Param("id") int id);
+
+    @Select("select a.id,a.title,a.content,a.pics,a.create_time createTime, a.address,a.zanNum,a.plate,a.user_id userId,b.nickname,b.headPic,b.sex from article a, user b where a.user_id = b.id limit #{pojo.currentResult},#{pojo.pageSize}")
+    List<ArticleInfo> getPageList(@Param("pojo") Page page);
+
+    @Select("select count(1) from article")
+    int getNum();
 }

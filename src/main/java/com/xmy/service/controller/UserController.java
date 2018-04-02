@@ -43,4 +43,12 @@ public class UserController {
         return userDao.getById(id);
     }
 
+    //关注
+    @RequestMapping(value = "/follow", produces = "application/json;charset=UTF-8")
+    public JsonResponse follow(@RequestParam("user1Id") String user1_id, @RequestParam("user2Id") String user2_id){
+        int user1Id = Integer.valueOf(user1_id);
+        int user2Id = Integer.valueOf(user2_id);
+        userDao.addFollow(user1Id, user2Id);
+        return new JsonResponse("");
+    }
 }
