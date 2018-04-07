@@ -1,11 +1,15 @@
 package com.xmy.service.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.xmy.bean.bean.User;
 import com.xmy.service.dao.UserDao;
+import com.xmy.service.service.UserService;
 import com.xmy.service.util.JsonResponse;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/login")
     public User login(@RequestParam String username, @RequestParam String password){
@@ -33,6 +39,11 @@ public class UserController {
         return new JsonResponse(userDao.userList());
     }
 
+    @RequestMapping("/getAdverts")
+    public List<User> getAdverts(){
+        return userDao.getAdverts();
+    }
+
     @RequestMapping("/list")
     public List<User> list(){
         return userDao.userList();
@@ -41,6 +52,15 @@ public class UserController {
     @RequestMapping("/getUserById")
     public User getById(@RequestParam("id") int id){
         return userDao.getById(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/saveInfo")
+    public JsonResponse saveInfo(HttpServletRequest req){
+        userService.saveInfo(req);
+
+
+        return new JsonResponse("");
     }
 
     //关注

@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,8 +40,12 @@ public class TourServiceApplicationTests {
 	public void contextLoads() {
        // List<ArticleInfo> list = articleService.getArticleInfo();
         //com.xmy.bean.bean.User user = userDao.getByUsernameAndPassword("umy","111");
-        articleService.addArticle(new Article());
+        //articleService.addArticle(new Article());
         //articleDao.insert(null,null,null,null,null,null);
+        com.xmy.bean.bean.User user = new com.xmy.bean.bean.User();
+        user.setEmail("160694");
+
+        userDao.update(1,"大哥哥",user.getSex(),user.getEmail(),"3435345");
 	}
 
 

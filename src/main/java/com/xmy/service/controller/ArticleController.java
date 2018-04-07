@@ -68,14 +68,14 @@ public class ArticleController {
         return new JsonResponse("");
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin
     @RequestMapping(value = "/commentList", produces = "application/json;charset=UTF-8")
     public JsonResponse commentList(@RequestParam("articleId") String articleId){
         List<CommentInfo> list = articleService.commentList(articleId);
         return new JsonResponse(list);
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin
     @RequestMapping(value = "/addComment", produces = "application/json;charset=UTF-8")
     public JsonResponse addComment(@RequestParam("content")String commentContent,@RequestParam("userId")String userId,@RequestParam("articleId")String articleId){
         int user_id = Integer.valueOf(userId);
@@ -85,7 +85,7 @@ public class ArticleController {
         return new JsonResponse("");
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin
     @RequestMapping(value = "/deleteComment", produces = "application/json;charset=UTF-8")
     public JsonResponse deleteComment(@RequestParam("commentId") String commentId){
         int id = Integer.valueOf(commentId);
@@ -93,7 +93,7 @@ public class ArticleController {
         return new JsonResponse("");
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin
     @RequestMapping(value = "/deleteArticle", produces = "application/json;charset=UTF-8")
     public JsonResponse deleteArticle(@RequestParam("articleId") String articleId){
         int id = Integer.valueOf(articleId);
@@ -101,7 +101,7 @@ public class ArticleController {
         return new JsonResponse("");
     }
 
-    @CrossOrigin(origins = "http://localhost:8081")
+    @CrossOrigin
     @RequestMapping(value = "/laud", produces = "application/json;charset=UTF-8")
     public JsonResponse laud(@RequestParam("articleId") String articleId){
         int id = Integer.valueOf(articleId);

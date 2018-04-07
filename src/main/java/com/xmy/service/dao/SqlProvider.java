@@ -7,6 +7,23 @@ import java.util.Map;
 
 public class SqlProvider {
 
+	public String updateInfo(Map<String,Object> user){
+		String sql = "update user set ";
+		if(null!=user.get("nickname")) {
+			sql += "nickname='"+user.get("nickname").toString()+"',";
+		}
+		if(null!=user.get("email")) {
+			sql += "email='"+user.get("email").toString()+"',";
+		}
+		if(null!=user.get("phone")) {
+			sql += "phone='"+user.get("phone").toString()+"',";
+		}
+		if(null!=user.get("sex")) {
+			sql += "sex='"+user.get("sex").toString()+"'";
+		}
+		sql += " where id='"+user.get("id").toString()+"'";
+		return sql;
+	}
 
 	public String insertArticle(Map<String,Object> article){
 		String sql = "insert into article" +
