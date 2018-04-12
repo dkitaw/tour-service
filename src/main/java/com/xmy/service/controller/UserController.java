@@ -33,7 +33,7 @@ public class UserController {
     @RequestMapping("/login")
     public User login(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
         String ip = getIpAddress(request);
-        userDao.saveIp(ip);
+        //userDao.saveIp(ip);
         return userDao.getByUsernameAndPassword(username, password);
     }
 
