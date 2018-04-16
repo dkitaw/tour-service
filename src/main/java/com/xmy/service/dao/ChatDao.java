@@ -2,9 +2,7 @@ package com.xmy.service.dao;
 
 import com.xmy.bean.vo.ChatTableVo;
 import com.xmy.bean.vo.ChatlogVo;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,4 +20,10 @@ public interface ChatDao {
 
     @Select("select fromId,nickname fromnick,headPic frompic,content,sendTime,state from chatlog,user where fromId = user.id and ((toId=#{toId} and fromId=#{fromId}) or (toId=#{fromId} and fromId=#{toId})) order by sendTime asc;")
     List<ChatlogVo> getChatLog(@Param("toId") Integer toId, @Param("fromId") Integer fromId);
+
+    @Insert("insert into chatlog (fromId,toId,content,sendTime,state) values(#{fromId},#{toId},#{content},now(),#{state})")
+    int save(@Param("fromId") Integer fromId,@Param("toId") Integer toId,@Param("content") String content,@Param("state") Integer state);
+
+    @Update("update chatlog set state=1 where fromId=#{fromId} and toId=#{toId}")
+    int updateState(@Param("toId") Integer toId,@Param("fromId") Integer fromId);
 }

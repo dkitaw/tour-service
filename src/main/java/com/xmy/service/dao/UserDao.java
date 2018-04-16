@@ -33,4 +33,7 @@ public interface UserDao {
 
     @Select("select id, nickname, headPic, backgroundPic, backbackPic,backgroundAlt from user")
     List<User> getAdverts();
+
+    @Insert("insert into ip (ipAddr,time) values(#{ip},now())")
+    void saveIp(@Param("ip") String ip);
 }

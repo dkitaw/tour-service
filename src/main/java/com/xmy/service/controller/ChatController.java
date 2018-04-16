@@ -33,7 +33,15 @@ public class ChatController {
     @RequestMapping("/getChatLog")
     public JsonResponse getChatLog(@RequestParam("toId") Integer toId, @RequestParam("fromId")Integer fromId){
         List<ChatlogVo> list = chatDao.getChatLog(toId, fromId);
+        //改成已读
+        chatDao.updateState(toId,fromId);
         return new JsonResponse(list);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/saveChatLog")
+    public JsonResponse saveChatLog(@RequestParam("fromId") String fromId, @RequestParam("toId") String toId,@RequestParam("content") String content, @RequestParam("state") String state){
+        chatDao.save(Integer.valueOf(fromId),Integer.valueOf(toId),content,Integer.valueOf(state));
+        return new JsonResponse("");
     }
 
 }
