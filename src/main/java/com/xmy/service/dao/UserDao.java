@@ -2,6 +2,7 @@ package com.xmy.service.dao;
 
 
 import com.xmy.bean.bean.User;
+import com.xmy.bean.vo.Ipinfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -36,4 +37,13 @@ public interface UserDao {
 
     @Insert("insert into ip (ipAddr,time) values(#{ip},now())")
     void saveIp(@Param("ip") String ip);
+
+    @Select("select user.id userId,nickname,ipAddr,time from user,ip where user.id=ip.userId")
+    List<Ipinfo> loginIpInfo();
+
+    @Update("update user set state = '1' where id = #{id}")
+    int startUser(@Param("id") Integer id);
+
+    @Update("update user set state= '0' where id = #{id}")
+    int stopUser(@Param("id") Integer id);
 }

@@ -22,4 +22,7 @@ public interface CommentDao {
 
     @Delete("delete from comment where id = #{id}")
     int deleteById(@Param("id") int id);
+
+    @Select("select a.id,a.content,a.time,a.article_id articleId,a.user_id userId,b.nickname,b.headPic from comment a, user b where a.user_id = b.id")
+    List<CommentInfo> getList();
 }

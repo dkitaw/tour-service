@@ -1,5 +1,6 @@
 package com.xmy.service.dao;
 
+import com.xmy.bean.bean.Chatlog;
 import com.xmy.bean.vo.ChatTableVo;
 import com.xmy.bean.vo.ChatlogVo;
 import org.apache.ibatis.annotations.*;
@@ -15,10 +16,10 @@ import java.util.Map;
 @Mapper
 public interface ChatDao {
 
-    @Select("select fromId,nickname fromNickname,min(state) as state from chatlog, user where toId=#{toId} and fromId=user.id group by fromId;")
+    @Select("select fromId,nickname fromNickname,min(chatlog.state) as state from chatlog, user where toId=#{toId} and fromId=user.id group by fromId;")
     List<ChatTableVo> getListGroupByFromId(@Param("toId") int toId);
 
-    @Select("select fromId,nickname fromnick,headPic frompic,content,sendTime,state from chatlog,user where fromId = user.id and ((toId=#{toId} and fromId=#{fromId}) or (toId=#{fromId} and fromId=#{toId})) order by sendTime asc;")
+    @Select("select fromId,nickname fromnick,headPic frompic,content,sendTime,chatlog.state from chatlog,user where fromId = user.id and ((toId=#{toId} and fromId=#{fromId}) or (toId=#{fromId} and fromId=#{toId})) order by sendTime asc;")
     List<ChatlogVo> getChatLog(@Param("toId") Integer toId, @Param("fromId") Integer fromId);
 
     @Insert("insert into chatlog (fromId,toId,content,sendTime,state) values(#{fromId},#{toId},#{content},now(),#{state})")
@@ -26,4 +27,7 @@ public interface ChatDao {
 
     @Update("update chatlog set state=1 where fromId=#{fromId} and toId=#{toId}")
     int updateState(@Param("toId") Integer toId,@Param("fromId") Integer fromId);
+
+    @Select("select fromId,nickname fromnick,headPic frompic,content,sendTime,chatlog.state from chatlog,user where fromId = user.id order by sendTime desc;")
+    List<ChatlogVo> getList();
 }
