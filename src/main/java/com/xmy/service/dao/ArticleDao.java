@@ -16,7 +16,14 @@ import java.util.List;
 public interface ArticleDao {
 
     @Select("select a.id,a.title,a.content,a.pics,a.create_time createTime, a.address,a.zanNum,a.plate,a.user_id userId,b.nickname,b.headPic,b.sex from article a, user b where a.user_id = b.id")
-    public List<ArticleInfo> getArticleInfo();
+    List<ArticleInfo> getArticleInfo();
+
+    @SelectProvider(type = SqlProvider.class, method = "getArticleInfo")
+    List<ArticleInfo> getArticleBySearch(@Param("currentResult") Integer currentResult,
+                                     @Param("pageSize") Integer pageSize,
+                                     @Param("nowdays") String nowdays,
+                                     @Param("plate") Integer plate,
+                                     @Param("approve") Integer approve);
 
     @InsertProvider(type=SqlProvider.class, method="insertArticle")
     void insert(@Param("title") String title,

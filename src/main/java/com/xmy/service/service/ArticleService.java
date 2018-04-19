@@ -5,6 +5,7 @@ import com.xmy.bean.bean.Comment;
 import com.xmy.bean.bean.User;
 import com.xmy.bean.common.Page;
 import com.xmy.bean.vo.ArticleInfo;
+import com.xmy.bean.vo.ArticleSearch;
 import com.xmy.bean.vo.CommentInfo;
 import com.xmy.service.dao.ArticleDao;
 import com.xmy.service.dao.CommentDao;
@@ -64,5 +65,9 @@ public class ArticleService {
 
     public List<ArticleInfo> getArticlePageList(Page page) {
         return articleDao.getPageList(page);
+    }
+
+    public List<ArticleInfo> getArticleBySearch(ArticleSearch as){
+        return articleDao.getArticleBySearch(as.getCurrentResult(),as.getPageSize(),as.getNowdays(),as.getPlate(),as.getApprove());
     }
 }

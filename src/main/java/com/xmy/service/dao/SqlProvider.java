@@ -1,11 +1,38 @@
 package com.xmy.service.dao;
 
 import com.xmy.bean.bean.Article;
+import com.xmy.bean.vo.ArticleInfo;
 import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
 public class SqlProvider {
+
+	boolean isEmpty(Object o){
+		if(null==o||"".equals(o)){
+			return true;
+		}
+		return false;
+	}
+
+	public String getArticleInfo(Map<String, Object> map){
+		String sql = "select a.id,a.title,a.content,a.pics,a.create_time createTime, a.address,a.zanNum,a.plate,a.user_id userId,b.nickname,b.headPic,b.sex from article a, user b where a.user_id = b.id";
+		if(!isEmpty(map.get("nowdays"))){
+			if("week".equals(map.get("nowdays").toString()))
+				sql += " and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(a.create_time)";
+			else
+				sql += " and DATE_SUB(CURDATE(), INTERVAL 1 MONTH) <= date(a.create_time)";
+
+		}
+		if(!isEmpty(map.get("plate"))){
+			sql += " and a.plate = '"+ map.get("plate").toString()+"'";
+		}
+		if(!isEmpty(map.get("approve"))){
+			sql += " and a.approve = '" + map.get("approve").toString()+"'";
+		}
+		sql += " limit "+map.get("currentResult").toString()+","+map.get("pageSize");
+		return sql;
+	}
 
 	public String updateInfo(Map<String,Object> user){
 		String sql = "update user set ";

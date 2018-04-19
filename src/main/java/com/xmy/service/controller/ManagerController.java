@@ -50,6 +50,20 @@ public class ManagerController {
         map.put("list",list);
         return new JsonResponse(map);
     }
+/*
+@CrossOrigin(origins = "*")
+    @RequestMapping("/getArticles")
+    public JsonResponse getList(@RequestParam("page")int page, @RequestParam("pageSize")int pageSize){
+        int totalNum = articleDao.getNum();
+        Page p = new Page(pageSize,totalNum,page);
+        int totalPage = p.getTotalPage();
+        List<ArticleInfo> list = articleDao.getPageList(p);
+        Map<String,Object> map = new HashMap<>();
+        map.put("totalPage",totalPage);
+        map.put("list",list);
+        return new JsonResponse(map);
+    }
+*/
 
     @CrossOrigin(origins = "*")
     @RequestMapping("/commentList")
