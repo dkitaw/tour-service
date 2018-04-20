@@ -15,6 +15,24 @@ public class SqlProvider {
 		return false;
 	}
 
+	public String getCount(Map<String, Object> map){
+		String sql = "select count(1) from article where 1=1";
+		if(!isEmpty(map.get("nowdays"))){
+			if("week".equals(map.get("nowdays").toString()))
+				sql += " and DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(create_time)";
+			else
+				sql += " and DATE_SUB(CURDATE(), INTERVAL 1 MONTH) <= date(create_time)";
+
+		}
+		if(!isEmpty(map.get("plate"))){
+			sql += " and plate = '"+ map.get("plate").toString()+"'";
+		}
+		if(!isEmpty(map.get("approve"))){
+			sql += " and approve = '" + map.get("approve").toString()+"'";
+		}
+		return sql;
+	}
+
 	public String getArticleInfo(Map<String, Object> map){
 		String sql = "select a.id,a.title,a.content,a.pics,a.create_time createTime, a.address,a.zanNum,a.plate,a.user_id userId,b.nickname,b.headPic,b.sex from article a, user b where a.user_id = b.id";
 		if(!isEmpty(map.get("nowdays"))){

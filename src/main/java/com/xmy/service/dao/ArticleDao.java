@@ -48,4 +48,9 @@ public interface ArticleDao {
 
     @Select("select count(1) from article")
     int getNum();
+
+    @SelectProvider(type = SqlProvider.class, method = "getCount")
+    int getCount(@Param("nowdays") String nowdays,
+                 @Param("plate") Integer plate,
+                 @Param("approve") Integer approve);
 }

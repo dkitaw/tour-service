@@ -2,20 +2,15 @@ package com.xmy.service.controller;
 
 import com.xmy.bean.bean.Comment;
 import com.xmy.bean.common.Page;
-import com.xmy.bean.vo.ArticleInfo;
-import com.xmy.bean.vo.ChatlogVo;
-import com.xmy.bean.vo.CommentInfo;
-import com.xmy.bean.vo.Ipinfo;
+import com.xmy.bean.vo.*;
 import com.xmy.service.dao.ArticleDao;
 import com.xmy.service.dao.ChatDao;
 import com.xmy.service.dao.CommentDao;
 import com.xmy.service.dao.UserDao;
+import com.xmy.service.service.ArticleService;
 import com.xmy.service.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +25,8 @@ import java.util.Map;
 @RequestMapping("/manage")
 public class ManagerController {
     @Autowired
+    private ArticleService articleService;
+    @Autowired
     private ArticleDao articleDao;
     @Autowired
     private UserDao userDao;
@@ -39,12 +36,16 @@ public class ManagerController {
     private ChatDao chatDao;
 
     @CrossOrigin(origins = "*")
-    @RequestMapping("/getArticles")
-    public JsonResponse getList(@RequestParam("page")int page, @RequestParam("pageSize")int pageSize){
-        int totalNum = articleDao.getNum();
-        Page p = new Page(pageSize,totalNum,page);
+    @RequestMapping(value="/getArticles",produces={"application/json;charset=UTF-8"})
+    public JsonResponse getList(@RequestBody ArticleSearch as){
+        int totalNum = articleService.getCount(as);
+        int pageSize = as.getPageSize();
+        int currentPage = as.getCurrentPage();
+        Page p = new Page(pageSize,totalNum, currentPage);
         int totalPage = p.getTotalPage();
-        List<ArticleInfo> list = articleDao.getPageList(p);
+        //List<ArticleInfo> list = articleDao.getPageList(p);
+        as.setCurrentResult((currentPage-1)*pageSize);
+        List<ArticleInfo> list = articleService.getArticleBySearch(as);
         Map<String,Object> map = new HashMap<>();
         map.put("totalPage",totalPage);
         map.put("list",list);

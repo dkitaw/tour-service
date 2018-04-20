@@ -1,6 +1,7 @@
 package com.xmy.service.dao;
 
 
+import com.xmy.bean.bean.Plate;
 import com.xmy.bean.bean.User;
 import com.xmy.bean.vo.Ipinfo;
 import org.apache.ibatis.annotations.*;
@@ -46,4 +47,7 @@ public interface UserDao {
 
     @Update("update user set state= '0' where id = #{id}")
     int stopUser(@Param("id") Integer id);
+
+    @Select("select * from plate")
+    List<Plate> getPlates();
 }

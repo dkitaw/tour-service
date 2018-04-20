@@ -1,6 +1,7 @@
 package com.xmy.service.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.xmy.bean.bean.Plate;
 import com.xmy.bean.bean.User;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.service.UserService;
@@ -45,6 +46,11 @@ public class UserController {
     @RequestMapping("/getAdverts")
     public List<User> getAdverts(){
         return userDao.getAdverts();
+    }
+
+    @RequestMapping("/getPlates")
+    public List<Plate> getPlates(){
+        return userDao.getPlates();
     }
 
     @RequestMapping("/list")

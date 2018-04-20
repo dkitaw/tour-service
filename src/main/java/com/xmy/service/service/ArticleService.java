@@ -70,4 +70,8 @@ public class ArticleService {
     public List<ArticleInfo> getArticleBySearch(ArticleSearch as){
         return articleDao.getArticleBySearch(as.getCurrentResult(),as.getPageSize(),as.getNowdays(),as.getPlate(),as.getApprove());
     }
+
+    public int getCount(ArticleSearch as) {
+        return articleDao.getCount(as.getNowdays(),as.getPlate(),as.getApprove());
+    }
 }
