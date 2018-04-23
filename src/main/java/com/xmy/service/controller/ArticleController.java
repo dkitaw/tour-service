@@ -57,6 +57,12 @@ public class ArticleController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/getArticleDetail", produces = "application/json;charset=UTF-8" , method = RequestMethod.POST)
+    public JsonResponse addArticle(@RequestParam("id") int id) {
+        ArticleInfo info = articleDao.getArticleDetail(id);
+        return new JsonResponse(info);
+    }
+    @CrossOrigin
     @RequestMapping(value = "/addArticle", produces = "application/json;charset=UTF-8" , method = RequestMethod.POST)
     public JsonResponse addArticle(@RequestBody Article article){
         articleService.addArticle(article);
