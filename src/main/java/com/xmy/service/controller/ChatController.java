@@ -5,12 +5,10 @@ import com.xmy.bean.vo.ChatlogVo;
 import com.xmy.service.dao.ChatDao;
 import com.xmy.service.util.JsonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -39,7 +37,11 @@ public class ChatController {
     }
     @CrossOrigin(origins = "*")
     @RequestMapping("/saveChatLog")
-    public JsonResponse saveChatLog(@RequestParam("fromId") String fromId, @RequestParam("toId") String toId,@RequestParam("content") String content, @RequestParam("state") String state){
+    public JsonResponse saveChatLog(@RequestBody Map<String,String> map){
+        String fromId = map.get("fromId");
+        String toId = map.get("toId");
+        String content = map.get("content");
+        String state = map.get("state");
         chatDao.save(Integer.valueOf(fromId),Integer.valueOf(toId),content,Integer.valueOf(state));
         return new JsonResponse("");
     }

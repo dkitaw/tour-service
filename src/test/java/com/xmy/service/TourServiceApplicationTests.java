@@ -8,6 +8,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.xmy.bean.bean.Article;
+import com.xmy.bean.vo.ArticleInfo;
+import com.xmy.bean.vo.ArticleSearch;
 import com.xmy.service.dao.ArticleDao;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.service.ArticleService;
@@ -42,10 +44,16 @@ public class TourServiceApplicationTests {
         //com.xmy.bean.bean.User user = userDao.getByUsernameAndPassword("umy","111");
         //articleService.addArticle(new Article());
         //articleDao.insert(null,null,null,null,null,null);
-        com.xmy.bean.bean.User user = new com.xmy.bean.bean.User();
-        user.setEmail("160694");
+        //com.xmy.bean.bean.User user = new com.xmy.bean.bean.User();
+        //user.setEmail("160694");
+        //userDao.update(1,"大哥哥",user.getSex(),user.getEmail(),"3435345");
 
-        userDao.update(1,"大哥哥",user.getSex(),user.getEmail(),"3435345");
+        ArticleSearch as = new ArticleSearch();
+        as.setCurrentResult(0);
+        as.setPageSize(10);
+        as.setNowdays("month");
+        List<ArticleInfo> list = articleService.getArticleBySearch(as);
+
 	}
 
 
