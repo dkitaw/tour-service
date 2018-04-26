@@ -108,7 +108,7 @@ public class ArticleController {
         return new JsonResponse("");
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/laud", produces = "application/json;charset=UTF-8")
     public JsonResponse laud(@RequestParam("articleId") String articleId){
         int id = Integer.valueOf(articleId);

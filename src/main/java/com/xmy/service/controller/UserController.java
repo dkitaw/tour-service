@@ -6,6 +6,7 @@ import com.xmy.bean.bean.User;
 import com.xmy.service.dao.UserDao;
 import com.xmy.service.service.UserService;
 import com.xmy.service.util.JsonResponse;
+import com.xmy.service.util.MD5;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -31,14 +32,16 @@ public class UserController {
     @RequestMapping("/login")
     public User login(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
         String ip = getIpAddress(request);
-        //userDao.saveIp(ip);
-        return userDao.getByUsernameAndPassword(username, password);
+        User user =  userDao.getByUsernameAndPassword(username, MD5.md5(password));
+        userDao.saveIp(ip,user.getId());
+        return user;
     }
     @CrossOrigin(origins = "*")
     @RequestMapping("/register")
     public JsonResponse register(@RequestBody User user){
         User u = userDao.getByUsername(user.getUsername());
         if(null==u) {
+            user.setPassword(MD5.md5(user.getPassword()));
             userDao.save(user);
         }else{
             return new JsonResponse(new Exception());

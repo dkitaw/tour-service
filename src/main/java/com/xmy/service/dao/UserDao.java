@@ -36,8 +36,8 @@ public interface UserDao {
     @Select("select id, nickname, headPic, backgroundPic, backbackPic,backgroundAlt from user where id<6")
     List<User> getAdverts();
 
-    @Insert("insert into ip (ipAddr,time) values(#{ip},now())")
-    void saveIp(@Param("ip") String ip);
+    @Insert("insert into ip (userId,ipAddr,time) values(#(userId),#{ip},now())")
+    void saveIp(@Param("ip") String ip, @Param("userId")Integer userId);
 
     @Select("select user.id userId,nickname,ipAddr,time from user,ip where user.id=ip.userId")
     List<Ipinfo> loginIpInfo();
