@@ -33,7 +33,7 @@ public interface UserDao {
                @Param("email")String email,
                @Param("phone")String phone);
 
-    @Select("select id, nickname, headPic, backgroundPic, backbackPic,backgroundAlt from user")
+    @Select("select id, nickname, headPic, backgroundPic, backbackPic,backgroundAlt from user where id<6")
     List<User> getAdverts();
 
     @Insert("insert into ip (ipAddr,time) values(#{ip},now())")
@@ -50,4 +50,10 @@ public interface UserDao {
 
     @Select("select * from plate")
     List<Plate> getPlates();
+
+    @Insert("insert into user (nickname,username,password,sex) values(#{pd.nickname},#{pd.username},#{pd.password},#{pd.sex})")
+    int save(@Param("pd") User user);
+
+    @Select("select * from user where username = #{username}")
+    User getByUsername(@Param("username") String username);
 }

@@ -11,10 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,17 @@ public class UserController {
         String ip = getIpAddress(request);
         //userDao.saveIp(ip);
         return userDao.getByUsernameAndPassword(username, password);
+    }
+    @CrossOrigin(origins = "*")
+    @RequestMapping("/register")
+    public JsonResponse register(@RequestBody User user){
+        User u = userDao.getByUsername(user.getUsername());
+        if(null==u) {
+            userDao.save(user);
+        }else{
+            return new JsonResponse(new Exception());
+        }
+        return new JsonResponse("");
     }
 
     @RequestMapping("/userList")
