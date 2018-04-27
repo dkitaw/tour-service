@@ -31,10 +31,14 @@ public class UserController {
 
     @RequestMapping("/login")
     public User login(@RequestParam String username, @RequestParam String password,HttpServletRequest request){
-        String ip = getIpAddress(request);
-        User user =  userDao.getByUsernameAndPassword(username, MD5.md5(password));
-        userDao.saveIp(ip,user.getId());
-        return user;
+        try {
+            String ip = getIpAddress(request);
+            User user =  userDao.getByUsernameAndPassword(username, MD5.md5(password));
+            userDao.saveIp(ip,user.getId());
+            return user;
+        } catch (Exception e) {
+            return null;
+        }
     }
     @CrossOrigin(origins = "*")
     @RequestMapping("/register")
