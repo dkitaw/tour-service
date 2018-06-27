@@ -13,7 +13,8 @@ import java.util.Map;
 
 @Mapper
 public interface UserDao {
-
+   @Update("update user set sex = sex-1 where id='1' and sex>'0'")
+   Integer skill();
    @Select("SELECT * FROM user where id = #{id}")
    User getById(@Param("id") Integer id);
 
